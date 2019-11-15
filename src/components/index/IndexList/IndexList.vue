@@ -9,7 +9,7 @@
           </view>
           <view class="item_right">
             <button type="primary" v-if="item.focus" class="active" @tap="attention(item)">+关注</button>
-            <button type="default" v-else>已关注</button>
+            <button type="default" @tap="attention(item)" v-else>已关注</button>
           </view>
         </view>
         <view class="item_content">
@@ -89,8 +89,13 @@
         } else {}
       },
       attention(item) {
-        item.focus = false;
-        this.$toast.show('关注成功~'); //提示框
+          if(item.focus){
+              item.focus = false;
+              this.$toast.show('关注成功哦~'); //提示框
+          }else{
+              item.focus = true;
+              this.$toast.show('已取消关注~'); //提示框
+          }
       }
     },
     components: {

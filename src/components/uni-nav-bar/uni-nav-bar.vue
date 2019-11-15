@@ -142,12 +142,12 @@
 		display: inline-flex;
 		flex-wrap: nowrap;
 		flex-shrink: 0;
-		width: 120upx;
-		padding: 0 20upx
+		/*width: 120upx;*/
+		padding: 0 10upx
 	}
 
 	.uni-navbar__header-btns:first-child {
-		padding-left: 0
+		//padding-left: 0
 	}
 
 	.uni-navbar__header-btns:last-child {

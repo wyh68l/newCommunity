@@ -17,7 +17,7 @@
 	@import 'common/public_css/uni.css';/* 官方样式 */
 	@import 'common/public_css/animate.min.css';
 	/* @import 'common/public_css/iconfont.css'; *//* 阿里第三方图标库 ,本地的文件可以运行在小程序*/
-	@import 'https://at.alicdn.com/t/font_1392728_niiftqiy5ye.css';/* 在线链接不可以运行在小程序,但可以运行在网页中*/
+	@import 'https://at.alicdn.com/t/font_1392728_anya06zwhpn.css';/* 在线链接不可以运行在小程序,但可以运行在网页中*/
   @import 'common/public_css/base.less';
 
   uni-page-head .uni-page-head{

@@ -1,68 +1,76 @@
 <template>
   <view class="tabs">
     <scroll-view id="tab-bar" class="scroll-h" :scroll-x="true" :show-scrollbar="false">
-      <view v-for="(tab,index) in tabBars" :key="tab.id" class="uni-tab-item" :id="tab.id" :data-current="index" @click="ontabtap(index)">
-        <text class="uni-tab-item-title" :class="tabIndex==index ? 'uni-tab-item-title-active' : ''">{{tab.name}}</text>
+      <view v-for="(tab,index) in tabBars" :key="tab.id" class="uni-tab-item" :id="tab.id" :data-current="index"
+            @click="ontabtap(index)">
+        <text class="uni-tab-item-title" :class="indexTabIndex===index ? 'uni-tab-item-title-active' : ''" v-if="type === 'index'">{{tab.name}}</text>
+        <text class="uni-tab-item-title" :class="newsTabIndex===index ? 'uni-tab-item-title-active' : ''" v-if="type === 'news'">{{tab.name}}</text>
       </view>
     </scroll-view>
   </view>
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        tabIndex: 0,
-        tabBars: [{
-          name: '关注',
-          id: 'guanzhu'
-        }, {
-          name: '推荐',
-          id: 'tuijian'
-        }, {
-          name: '体育',
-          id: 'tiyu'
-        }, {
-          name: '热点',
-          id: 'redian'
-        }, {
-          name: '财经',
-          id: 'caijing'
-        }, {
-          name: '娱乐',
-          id: 'yule'
-        }, {
-          name: '军事',
-          id: 'junshi'
-        }, {
-          name: '历史',
-          id: 'lishi'
-        }, {
-          name: '本地',
-          id: 'bendi'
-        }]
-      }
-    },
-    created(){
-      //获取首页内容滑块改变的下标
-      this.$bus.$on('changeTabIndex',(res) =>{
-         this.tabIndex = res;
-      })
-    },
-    methods: {
-      ontabtap(index) {
-        this.tabIndex = index;
-        this.$emit('tabIndex',index);
-      },
+    export default {
+        data() {
+            return {
+                indexTabIndex: 0,
+                newsTabIndex:0,
+                path:'',
+                type: null
+            }
+        },
+        props:{
+            tabBars:{
+                default(){
+                    return []
+                },
+                type:Array
+            }
+        },
+        created() {
+            this.init();
+            //this.changeTabIndex();
+        },
+        updated(){
+
+        },
+        methods: {
+            init(){
+                this.path = this.$route.meta.pagePath;
+                if(this.path.indexOf('/index') !== -1){
+                    this.type = 'index'
+                    //获取首页内容滑块改变的下标
+                    this.$bus.$on('indexChangeTabIndex', (res) => {
+                        this.indexTabIndex = res;
+                    })
+                }else if(this.path.indexOf('/news') !== -1){
+                    this.type = 'news'
+                    //获取首页内容滑块改变的下标
+                    this.$bus.$on('newsChangeTabIndex', (res) => {
+                        this.newsTabIndex = res;
+                    })
+                }
+            },
+            ontabtap(index) {
+                if(this.path.indexOf('/index') !== -1){
+                    this.indexTabIndex = index;
+                    this.$bus.$emit('indexTabIndex', index);
+                }else if(this.path.indexOf('/news') !== -1){
+                    this.newsTabIndex = index;
+                    this.$bus.$emit('newsTabIndex', index);
+                }
+            },
+        }
     }
-  }
 </script>
 
 <style lang="less">
   @import '../../common/public_css/base.less';
+
   .scroll-h {
-    width: 750upx;
-    height: 80upx;
+    /*width: 750upx;*/
+    /*height: 80upx;*/
     flex-direction: row;
     /* #ifndef APP-PLUS */
     white-space: nowrap;

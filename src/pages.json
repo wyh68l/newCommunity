@@ -58,7 +58,10 @@
     }, {
       "path": "pages/news/news",
       "style": {
-        "navigationBarTitleText": "趣事"
+        "app-plus":{
+          //自定义标题栏，禁止显示原生标题栏
+          "titleNView":false
+        }
       }
     }, {
       "path": "components/index/IndexList/IndexList",

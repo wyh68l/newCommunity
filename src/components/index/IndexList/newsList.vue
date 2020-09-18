@@ -1,7 +1,8 @@
 <template>
   <view class="page">
     <view class="content">
-      <view class="list animated bounceInUp fast" v-for="(item,index) in indexList" :key='index'>
+      <!--关注界面-->
+      <view class="list animated bounceInRight fast" v-for="(item,index) in attentionList" :key='index'>
         <view class="top_nav clearfix">
           <view class="item_left">
             <image :src="item.icon" mode="scaleToFill" lazy-load></image>
@@ -13,13 +14,16 @@
           </view>
         </view>
         <view class="item_content">
-          <view class="img" v-if="item.contentType === 'default'">
+          <view class="img" v-if="item.contentType === 'img'">
             <text>{{item.title}}</text>
             <image :src="item.content" mode="scaleToFill" lazy-load></image>
           </view>
           <view class="share" v-if="item.contentType === 'share'">
             <image :src="item.content" mode="scaleToFill" lazy-load></image>
             <text>{{item.shareTitle}}</text>
+          </view>
+          <view class="default" v-if="item.contentType === 'default'">
+            <text>{{item.contentText}}</text>
           </view>
         </view>
         <view class="item_bottom clearfix">
@@ -36,9 +40,10 @@
         </view>
         <loadMore :isMore='item'></loadMore>
       </view>
-      <view v-if='indexList.length === 0' class="nothing">
+      <view v-if='attentionList.length === 0' class="nothing">
         <Nothing></Nothing>
       </view>
+
     </view>
   </view>
 </template>
@@ -46,6 +51,7 @@
 <script>
     import LoadMore from '../../LoadMore.vue'
     import Nothing from '../../Nothing.vue'
+
     export default {
         data() {
             return {
@@ -55,7 +61,7 @@
             }
         },
         props: {
-            indexList: {
+            attentionList: {
                 type: Array,
                 default () {
                     return []
@@ -116,7 +122,7 @@
 </script>
 
 <style lang="less" scoped>
-  @import '../../../common/public_css/base.less';
+  @import '~common/public_css/base.less';
 
   .page {
     padding: 15upx 0;
@@ -124,6 +130,7 @@
     .content {
       padding: 0 30upx;
 
+      //关注
       .list {
         border-bottom: 1px solid #f6f6f6;
         padding-bottom: 10upx;
@@ -214,6 +221,15 @@
               height: 100upx;
               margin-right: 20upx;
               border-radius: 10upx;
+            }
+          }
+          .default{
+            text {
+              color: #444444;
+              font-size: 32upx;
+              display: block;
+              padding: 20upx;
+              overflow: hidden;
             }
           }
         }

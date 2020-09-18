@@ -2,21 +2,45 @@
   <view class="page">
     <view class="uni-tab-bar">
       <!-- :current为uniapp内置属性，意思是设置当前的滑块的下标-->
-      <swiper class="swiper-box" :style="{'height':scrollHeight+'px'}"
-              :current="type === 'index'?indexTabIndex:newsTabIndex" @change="changeTabIndex">
+      <swiper class="swiper-box" :style="{'height':scrollHeight+'px'}" :current="type === 'index'?indexTabIndex:newsTabIndex" @change="changeTabIndex">
 
-        <swiper-item v-for="(item,index) in swiperList" :key="index">
+        <!--首页-->
+        <swiper-item v-for="(item,index) in swiperList" :key="index" v-if="type === 'index'">
 
-          <view class="search" v-if="index === 1 && type === 'news'">
-            <input type="text" class="uni-input" placeholder="搜索内容" placeholder-class="topic-search
-        uni-page-head-search-placeholder">
-          </view>
 
           <!-- @scrolltolower为uniapp的触底事件-->
           <scroll-view scroll-y="true" class="list" @scrolltolower="loadMore(index)">
-            <IndexList :indexList='item.indexList' v-if="type === 'index'"></IndexList>
-            <newsList :indexList='item.indexList' v-if="type === 'news'"></newsList>
+            <IndexList :indexList='item.indexList'></IndexList>
           </scroll-view>
+        </swiper-item>
+
+
+        <!--趣事-->
+        <swiper-item v-if="type === 'news'">
+          <!-- @scrolltolower为uniapp的触底事件-->
+          <scroll-view scroll-y="true" class="list">
+            <newsList :attentionList='swiperNewsList.attentionList' ></newsList>
+          </scroll-view>
+
+        </swiper-item>
+
+        <swiper-item v-if="type === 'news'">
+          <!-- @scrolltolower为uniapp的触底事件-->
+          <scroll-view scroll-y="true" class="list" >
+            <view class="search">
+              <input type="text" class="uni-input" placeholder="搜索内容" placeholder-class="topic-search uni-page-head-search-placeholder">
+            </view>
+            <topicList :topicList='swiperNewsList.topicList'></topicList>
+          </scroll-view>
+
+        </swiper-item>
+
+        <swiper-item v-if="type === 'paper'">
+          <!-- @scrolltolower为uniapp的触底事件-->
+          <scroll-view scroll-y="true" class="list" >
+            <chatList :list="list"></chatList>
+          </scroll-view>
+
         </swiper-item>
 
       </swiper>
@@ -25,8 +49,10 @@
 </template>
 
 <script>
-    import IndexList from '../../components/index/IndexList/IndexList.vue'
+    import IndexList from '../index/IndexList/IndexList.vue'
     import newsList from "../index/IndexList/newsList";
+    import topicList from "../index/IndexList/topicList";
+    import chatList from "../../pages/paper/chatList";
 
     export default {
         data() {
@@ -44,6 +70,18 @@
                     return []
                 },
                 type: Array
+            },
+            swiperNewsList: {
+                default() {
+                    return {}
+                },
+                type: Object
+            },
+            list:{
+                default(){
+                    return []
+                },
+                type:Array
             }
         },
         created() { //这是uniapp中的生命周期函数，表示刚创建页面，和created类似
@@ -53,7 +91,7 @@
         computed: {},
         methods: {
             init() {
-                this.path = this.$route.meta.pagePath;
+                 this.path = this.$route?this.$route.meta.pagePath:getCurrentPages()[0].route;
                 if (this.path.indexOf('/index') !== -1) {
                     this.type = 'index';
                     this.$bus.$on('indexTabIndex', (res) => {
@@ -64,6 +102,8 @@
                     this.$bus.$on('newsTabIndex', (res) => {
                         this.newsTabIndex = res;
                     })
+                } else if (this.path.indexOf('/paper') !== -1) {
+                    this.type = 'paper';
                 }
             },
             getScrollHeight() {
@@ -120,7 +160,9 @@
         },
         components: {
             IndexList,
-            newsList
+            newsList,
+            topicList,
+            chatList
         }
     }
 </script>
@@ -131,7 +173,7 @@
       width: 100% !important;
     }
 
-    .search{
+    .search {
       border: 1px solid #f0f0f0;
       height: 70upx;
       font-size: 28upx;
@@ -139,16 +181,18 @@
       margin: 20upx;
       border-radius: 10upx;
 
-      input{
+      input {
         background-color: #f6f6f6;
         height: 70upx;
         border-radius: 10upx;
         padding-left: 20upx;
       }
-      .topic-search{
+
+      .topic-search {
         text-align: center;
       }
-      .uni-page-head-search-placeholder:before{
+
+      .uni-page-head-search-placeholder:before {
         left: 33%;
         font-size: 28upx;
       }

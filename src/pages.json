@@ -53,7 +53,10 @@
     }, {
       "path": "pages/paper/paper",
       "style": {
-        "navigationBarTitleText": "小纸条"
+        "app-plus":{
+          //自定义标题栏，禁止显示原生标题栏
+          "titleNView":false
+        }
       }
     }, {
       "path": "pages/news/news",

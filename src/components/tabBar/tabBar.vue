@@ -37,7 +37,8 @@
         },
         methods: {
             init(){
-                this.path = this.$route.meta.pagePath;
+                //console.log();
+                this.path = this.$route?this.$route.meta.pagePath:getCurrentPages()[0].route;
                 if(this.path.indexOf('/index') !== -1){
                     this.type = 'index'
                     //获取首页内容滑块改变的下标

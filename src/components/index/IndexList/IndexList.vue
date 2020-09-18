@@ -1,7 +1,7 @@
 <template>
   <view class="page">
     <view class="content">
-      <view class="list animated bounceInUp fast" v-for="(item,index) in indexList" :key='index'>
+      <view class="list animated bounceInRight fast" v-for="(item,index) in indexList" :key='index'>
         <view class="top_nav clearfix">
           <view class="item_left">
             <image :src="item.icon" mode="scaleToFill" lazy-load></image>

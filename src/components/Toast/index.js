@@ -10,10 +10,10 @@ obj.install = function (vue) {
   const toast = new toastContrustor()
 
   //将组件对象手动挂载到某一个元素上
-  toast.$mount(document.createElement('div'))
+  toast.$mount(window.document.createElement('div'))
 
   //toast.$el对应的就是div
-  document.body.appendChild(toast.$el)
+  window.document.body.appendChild(toast.$el)
 
   vue.prototype.$toast = toast;
 

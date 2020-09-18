@@ -6,11 +6,67 @@
   "description": "商城",
   "glyphs": [
     {
+      "icon_id": "119107",
+      "name": "转发",
+      "font_class": "zhuanfa",
+      "unicode": "e6c4",
+      "unicode_decimal": 59076
+    },
+    {
+      "icon_id": "722180",
+      "name": "笑脸、成功",
+      "font_class": "xiaolianchenggong",
+      "unicode": "e69a",
+      "unicode_decimal": 59034
+    },
+    {
+      "icon_id": "792377",
+      "name": "kulian-哭脸",
+      "font_class": "kuliankulian",
+      "unicode": "e6c0",
+      "unicode_decimal": 59072
+    },
+    {
       "icon_id": "1181053",
       "name": "编辑",
       "font_class": "bianji",
       "unicode": "e630",
       "unicode_decimal": 58928
+    },
+    {
+      "icon_id": "1526312",
+      "name": "加号",
+      "font_class": "jiahao",
+      "unicode": "e660",
+      "unicode_decimal": 58976
+    },
+    {
+      "icon_id": "1546598",
+      "name": "微博",
+      "font_class": "weibo",
+      "unicode": "e699",
+      "unicode_decimal": 59033
+    },
+    {
+      "icon_id": "1638201",
+      "name": "删除",
+      "font_class": "shanchu",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "4406936",
+      "name": "评论",
+      "font_class": "pinglun",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "4425828",
+      "name": "上拉",
+      "font_class": "shangla",
+      "unicode": "e797",
+      "unicode_decimal": 59287
     },
     {
       "icon_id": "5390965",
@@ -69,11 +125,32 @@
       "unicode_decimal": 59220
     },
     {
+      "icon_id": "6234530",
+      "name": "下拉",
+      "font_class": "xiala",
+      "unicode": "e634",
+      "unicode_decimal": 58932
+    },
+    {
+      "icon_id": "6742309",
+      "name": "微信",
+      "font_class": "weixin",
+      "unicode": "e686",
+      "unicode_decimal": 59014
+    },
+    {
       "icon_id": "7192326",
       "name": "签到",
       "font_class": "qiandao",
       "unicode": "e609",
       "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "7239850",
+      "name": "qq",
+      "font_class": "qq",
+      "unicode": "e746",
+      "unicode_decimal": 59206
     },
     {
       "icon_id": "8575294",
@@ -109,6 +186,20 @@
       "font_class": "fanhui1",
       "unicode": "e641",
       "unicode_decimal": 58945
+    },
+    {
+      "icon_id": "10809885",
+      "name": "向右 箭头",
+      "font_class": "icon-right",
+      "unicode": "e74b",
+      "unicode_decimal": 59211
+    },
+    {
+      "icon_id": "11349096",
+      "name": "loading",
+      "font_class": "loading",
+      "unicode": "e639",
+      "unicode_decimal": 58937
     }
   ]
 }
